@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+ 
+<title>TODO APPLICATION</title>
+</head>
+<body>
+	<div class="modal-body"></div>
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div th:switch="${listTodo}" class="container my-5">
+					<p class="my-5">
+						<a href="/new" class="btn btn-primary"><i
+							class="fas fa-user-plus ml-2"> New Activity</i></a>
+					</p>
+					<div class="col-md-10">
+						<h2 th:case="null">No Activity yet!</h2>
+						<div th:case="*">
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>TODO</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="todo : ${listTodo}">
+
+										<td>
+											<div class="card" style="width: 28rem;margin-left:20%;margin-right:20%;">
+												<img src="img/test.png" class="card-img-top" alt="this is edins logo" width="100%">
+												<div class="card-body">
+													<div class="row">
+														<div class="col-md-6">
+															<h5 class="card-title" th:text="${todo.title}">Card title</h5>
+														</div>
+														<div class="col-md-6">
+															<h5>
+																<span style="color:#007bff;float: right;" th:text="${todo.date}"></span>
+															</h5>
+														</div>
+													</div>
+													<p class="card-text" th:text="${todo.discription}">Some quick example text to build
+														on the card title and make up the bulk of the card's
+														content.</p>
+													<a th:href="@{'/edit/' + ${todo.id}}" class="btn btn-primary">Edit Activity</a> 
+													<a th:href="@{'/delete/' + ${todo.id}}" class="btn btn-danger" style="float: right;" onclick="return confirm('Do you want to delete?')">Delete</a>
+												</div>
+											</div>
+										</td>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
